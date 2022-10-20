@@ -1,5 +1,10 @@
 # Bachelorproef toegepaste informatica
 
+## Links naar PDF's
+
+- [Het onderzoeksvoorstel](./voorstel/DeWitteToon-BPvoorstel.pdf)
+- [De bachelorproef zelf](./bachproef/DeWitteToonBP.pdf)
+
 Deze repository bevat LaTeX sjablonen voor gebruik bij het opmaken van je bachelorproef toegepaste informatica:
 
 - [Het onderzoeksvoorstel](./voorstel/)
