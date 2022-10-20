@@ -1,0 +1,74 @@
+%---------- Inleiding ---------------------------------------------------------
+
+\section{Introductie}%
+\label{sec:introductie}
+
+%Deep Learning (DL), Machine Learning (ML) en Artificiele Inteligentie (AI) zijn het voorbije decennia enorm veel gegroeid. Waar jaren geleden nog een supercomputer voor nodig was, kan nu op een bovengemiddelde computer. De kracht van Deep Learning zit in de grote hoeveelheid data die een getraind model accuraat en met hoge snelheid kan verwerken. DL, ML en AI zijn te vinden in een breed spectrum van domeinen, waar ze een grote meerwaarde bieden. Zo wil ILVO onderzoek doen naar het verband tussen hyperspectrale beelden van aardappelen en stootblauw. Het algoritme heeft enkel nood aan de pixels die effectief aardappel bevatten, dus zal de rest van de meetopstelling gemaskeerd moeten worden. Dit maskeren wordt gedaan door een \textit{valse} RGB-foto te genereren. Deze RGB-foto wordt gegenereerd aan de hand van 3 gekozen gofllengtes uit ons gemeten spectrum. Vervolgens wordt deze RGB-foto gesegmenteerd, wat betekent dat enkel de nuttige pixels aangeduid worden. Nu de locaties van de pixels van de aardappel gekend zijn kan alles behalve de aardappel afgeschermd worden. Dit afschermen wordt gedaan door een filter die per hyperspectrale afbeelding 100\% van de pixels van de aardappel doorlaat en 0\% van de niet relevante pixels. Naar deze filter zal vanaf nu gerefereerd worden als masker.
+%Dit onderzoek tracht aan te tonen dat het proces van de manuele segmentatie van aardappelen geautomatiseerd kan worden door middel van een gefinetuned Deep Learning model. Als gevolg zal het genereren van de maskers geautomatiseerd kunnen worden.
+
+Het ILVO wil onderzoek doen naar het verband tussen hyperspectrale beelden van aardappelen en stootblauw. Om geautomatiseerde analyse te doen op de beelden moet de meetopstelling uit de beelden gemaskeerd worden om enkel de hyperspectrale data van de aardappelen over te houden. Dit maskeren gebeurt tot nu toe manueel. Uit de hyperspectrale data worden 3 golflengtes geselecteerd om een RGB-foto te genereren. Deze RGB-foto's worden vervolgens gesegmenteerd, wat betekent dat enkel de nuttige pixels (die van de aardappel) aangeduid worden. Nu de locaties van de nuttige pixels gekend zijn kan op het volledige hyperspectrale beeld een filter toegepast worden. Deze filter maskeert de rest van de meetopstelling door 100\% van de pixel-data 'door te laten' van de nuttige pixels en 0\% van de nutteloze pixels. Deze filter fungeert als masker voor de hyperspectrale afbeelding. Per aardappel dient zo'n masker gemaakt te worden.
+Dit onderzoek tracht aan te tonen dat het proces van manueel segmenteren en dus ook het maken van de maskers geautomatiseerd kan worden. Alsook welke automatiseringsmethode de beste resultaten geeft.
+
+%---------- Stand van zaken ---------------------------------------------------
+
+\section{State-of-the-art}%
+\label{sec:state-of-the-art}
+
+%AI is moeilijk weg te denken uit ons dagelijks leven. De toepassingen hiervan zijn breed, gaande van het tonen van persoonlijke advertenties, tot het maken van kunst en het opsporen van kankercellen. De kracht van deze Deep Learning algoritmes is al extensief bewezen. Ook in landbouw heeft AI zijn plaats. Het grote voordeel van de landbouwsector is dat er een massa aan data te verzamelen valt. Metrics zoals vochtniveau en de opbrengst per vierkante meter kunnen verzameld worden met hyperspectrale beelden van de akkers. Al deze data nuttig verwerken kan een landbouwer helpen bij de keuze van efficiënte rijpaden voor tractoren en het efficiënt besproeien van akkers met pesticiden.
+
+Deep Learning (DL), Machine Learning (ML) en Artificiële Intelligentie (AI) zijn voorbije decennia enorm vooruitgegaan. Taken waar jaren geleden nog supercomputers voor nodig waren, kunnen nu uitgevoerd worden op een gemiddelde computer. Deze groei in rekenkracht zorgt ervoor dat deze drie technologieën kunnen ingezet worden om de massa aan data die vandaag de dag wordt verzameld te verwerken. Zo is een ANN getraind om betere voorspellingen te maken over de energiedensiteit van biomassa \autocite{Veza2022}. Hyperspectrale beeldvorming geeft ons de mogelijkheid om een  continuüm aan golflengtes waar te nemen. Voor exploratief onderzoek is dit ideaal, uit de resultaten kan vaak afgeleid worden welke golflengtes de meeste informatie bevatten. In reële toepassingen kan men dan specifiek waarnemingen doen op relevante golflengtes. Zo kon een onderzoek van het ILVO aantonen dat voor het pathogeen A.solani het best waarneembaar is op golflengtes van 750 nm, 550 nm en 680 nm \autocite{Vijver2020}. Domeinen waar potentieel is voor verzameling van een grote hoeveelheid nuttige data zijn goede kandidaten voor analyse van die data door een Artificial Neural Network (ANN). Hyperspectrale sensoren bieden de mogelijkheid om grote hoeveelheden data te verzamelen. De combinatie van deze twee technologieën lijkt bijgevolg een goede combinatie. In een onderzoek naar het pathogeen P.infestans konden de verschillende stadia van infectie waargenomen en gemonitord worden met een ANN en hyperspectrale beelden \autocite{Wang2008}.
+
+%---------- Methodologie ------------------------------------------------------
+\section{Methodologie}%
+\label{sec:methodologie}
+
+%Onderstaande stappen worden allemaal uitgevoerd in python. Spectral Python wordt gebruikt voor het inlezen en verwerken van de hyperspectrale data. PyTorch, samen met de Hugging Face libraries wordt aangewend voor het fine-tunen van het Deep Learning model.
+
+%Een Deep Learning algoritme maakt keuzes op basis van invoer of inputs. Deze inputs worden vermenigvuldigd door een bepaald getal, vaak weight genoemd. Vereenvoudigd vermenigvuldigt dit algoritme elk input en weight paar en maakt hier een sommatie van. Deze som word in een non-lineare funtie gestoken waaruit we een relevant eindresultaat krijgen. De weights bepalen de relevantie van de inputs en zijn dus verantwoordelijk voor de accuraatheid van ons model.
+
+%Bijvoorbeeld, als twee weights in functie van het verlies of loss stellen, dit zijn  foute voorspellingen van het algoritme, krijgen we een gemakkelijk te interpreteren 3D-reliëf. In dit virtueel reliëf werkt het algoritme dus het best als we in het diepste dal van loss zitten. Bij meer inputs blijft het principe hetzelfde maar is dit reliëf moeilijker visualiseerbaar omdat we in hogere dimensies werken. Het algoritme werkt naar dit dal toe door de weights volgens de gradiënt van het reliëf aan te passen. Het aanpassen van deze weights volgens de gradiënt is wat er effectief gebeurt als we het model trainen.
+
+%Om het Deep Learning model te trainen moet eerst aan het model duidelijk gemaakt worden wat nu precies een aardappel is en hoe het model zelf aardappelen kan leren herkennen. Dit doen we aan de hand van een handmatig gesegmenteerde dataset van aardappelen
+
+%Dit onderzoek maakt gebruik van een voorgetrained algoritme. Dit is gepubliceerd door Facebook en te vinden op het Hugging Face platform. Het model in kwestie \textit{detr-resnet-50-panoptic} is een panoptisch Segmentatiemodel dat gebruik maakt van End-to-End Object Detection \autocite{Carion2020}. Concreet betekent dit dat het model een combinatie van semantische en instance segmentatie uitvoert. Semantische segmentatie zal elke pixel in het beeld benoemen en een betrouwbaarheidsscore geven aan deze benoeming. Instance segmentatie zal proberen een object te herkennen en enkel de pixels die volgens het algoritme bij dat object horen benoemen. Dit zorgt er ook voor dat elk object ook individueel zal benoemd worden. Bij een reeks aardappelen kan zo onderscheid gemaakt worden tussen elke individuele aardappel of instance van een aardappel.
+
+%De dataset waarop het model zal getrained worden bestaat uit aardappelen die gescheiden in een goot zijn ingescand. Het model zou dus geen probleem mogen hebben met het onderscheiden van de verschillende instances van aardappelen.
+
+%De dataset zal opgesplitst worden in drie subsets: train-, validation- en testdataset. De traindataset zal gebruikt worden in het finetunen van het model. De Validationdata zorgt voor een absolute bron van waarheid tijdens het trainen. Al wordt ook een bias opgebouwd voor de data in de evaluatiedataset, aangezien de weights van het model ook worden aangepast op basis van deze data. Tot slot hebben we de testdataset die we gebruiken om een volledig unbiased evaluatie uit te voeren op de finale waarden van het getrainde model.
+
+Onderstaande stappen worden allemaal uitgevoerd in Python. Python heeft een groot aanbod aan packages, libraries en frameworks die het gemakkelijker maken om een ANN te trainen. De grote community rond ANN's in python is grotendeels te danken aan de toegankelijkheid van de taal en dit zorgt voor heel grondige documentatie en begeleiding.
+
+Gegeven is een dataset van 5 aardappelrassen gescand door twee verschillende hyperspectrale sensoren op twee verschillende dagen. De hyperspectrale sensoren nemen golflengtes van 400nm tot 1700nm waar. Deze data wordt manueel gesegmenteerd en gelabeld.
+
+Dit onderzoek zal twee categorieën van segmentatiemethoden vergelijken met elkaar en de referentie dataset van manueel gesegmenteerde aardappelen. Deze eerste categorie bestaat uit klassieke methodes om aan segmentatie te doen. De tweede categorie vergelijkt verschillende Deep Learning modellen met elkaar.
+
+\textbf{Categorie 1:}
+
+De simpelste techniek voor segmentatie van afbeeldingen is tresholding. Deze techniek tracht objecten van zijn achtergrond te onderscheiden door de assumptie te maken dat vanaf een bepaalde waarde wordt overschreden de pixels deel uit maakt van een bepaald object.
+
+\textbf{Categorie 2:}
+
+Een ANN maakt keuzes op basis van inputs. Deze inputs worden vermenigvuldigd door een bepaalde weight. Vereenvoudigd vermenigvuldigt het algoritme elke input met zijn respectievelijk gewicht en maakt een sommatie van alle input-gewicht paren.  Deze Som wordt in een non-lineaire functie gestoken die een relevant eindresultaat geeft. De weights bepalen de relevantie van de inputs en zijn verantwoordelijk voor de accuraatheid van het model.
+
+Foute voorspellingen van het model zien we als een verlies of loss. De loss van het model is een functie van de weights. Het minima van deze loss-functie is het optimale scenario voor het model. Waar het model het accuraatst is. Dit is een complex gegeven maar in essentie willen we de weights per trainingscyclus (of epoch) van het model zo aanpassen dat we on naar dit minima bewegen. Deze aanpassing van de weights om een minimale foutmarge te verkrijgen is wat concreet gebeurt tijdens het trainen van het model.
+
+De dataset zal opgesplitst worden in drie subsets: train-, validation- en testdataset. De traindataset zal gebruikt worden in het finetunen van de modellen. De validationdata zorgt voor een absolute bron van waarheid tijdens het trainen. Tot slot hebben we de testdataset die we gebruiken om een volledig unbiased evaluatie uit te voeren op de finale waarden van het getrainde model.
+
+
+Segmentatie heeft verschillende varianten de meest voorkomende zijn semantische- en instance- segmentatie. Semantische segmentatie zal elke pixel in het beeld benoemen en een betrouwbaarheidsscore geven aan deze benoeming. Instance segmentatie zal proberen een object te herkennen en enkel de pixels die volgens het algoritme bij dat object horen benoemen. Dit zorgt er ook voor dat elk object ook individueel zal worden benoemd. Bij een reeks aardappelen kan zo onderscheid gemaakt worden tussen elke individuele aardappel of instance van een aardappel.
+
+Dit onderdeel van het onderzoek maakt gebruik van enkele verschillende modellen:
+- detr-resnet-50-panoptic
+- official YOLOv7
+
+\textit{detr-resnet-50-panoptic}: een panoptisch Segmentatiemodel dat gebruikmaakt van End-to-End Object Detection \autocite{Carion2020}. Concreet betekent dit dat het model een combinatie van semantische en instance segmentatie kan uitvoeren. 
+
+\textit{Official YOLOv7}: een voorgetraind model origineel gemaakt voor het detecteren van objecten in real time. Dit model kan ook getraind worden op instance segmentatie.
+
+
+%---------- Verwachte resultaten ----------------------------------------------
+\section{Verwacht resultaat, conclusie}%
+\label{sec:verwachte_resultaten}
+
+Thresholding zal de snelste manier zijn om aan automatische segmentatie te doen maar zal minder accuraat zijn dan de Deep Learning modellen. De modellen zullen eens getraind snel een accurate segmentatie uitvoeren. De methodes gebruikt in dit onderzoek zouden op een gelijkaardige manier kunnen toegepast worden om andere objecten te segmenteren.
+
