@@ -461,11 +461,11 @@
     
     \begingroup
       %% Print the title in the faculty color
-      \titlefont\color{title}\Huge\@title\@addpunct{.}\\
+      \titlefont\color{title}\Huge\@title\@addpunct{}\\
       %% Optionally print a subtitle
       \ifx\@subtitle\@empty\else
         \bigskip
-        \subtitlefont\LARGE\@subtitle\@addpunct{.}
+        \subtitlefont\LARGE\@subtitle\@addpunct{}
       \fi
       \hrule
     \endgroup
